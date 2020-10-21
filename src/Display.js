@@ -2,8 +2,16 @@ import React from "react";
 
 const Display = (props) => {
   const { bands } = props;
+  //   const { artists } = props;
   const loaded = () => (
     <div style={{ textAlign: "center" }}>
+      {/* {artists.map((artist) => (
+        <article>
+          <h1>{artist.name}</h1>
+          <h3>{artist.instrument}</h3>
+        </article>
+      ))} */}
+
       {bands.map((band) => (
         <article>
           <img src={band.img} />

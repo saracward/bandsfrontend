@@ -5,8 +5,10 @@ import Display from "./Display";
 import Form from "./Form";
 
 function App() {
-  const url = "https://bandsbackend.herokuapp.com/";
+  const url = "https://bandsbackend.herokuapp.com";
   const [bands, setBands] = React.useState([]);
+  const [artists, setArtists] = React.useState([]);
+
   const emptyBand = {
     name: "",
     genre: "",
@@ -25,12 +27,21 @@ function App() {
       });
   };
 
+  const getArtists = () => {
+    fetch(url + "/artists/")
+      .then((response) => response.json())
+      .then((data) => {
+        setArtists(data);
+      });
+  };
+
   //get dogs on page load
   React.useEffect(() => getBands(), []);
+  React.useEffect(() => getArtists(), []);
 
   //handleCreate Function for creating dogs
   const handleCreate = (newBand) => {
-    fetch(url + "/band/", {
+    fetch(url + "/bands/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +52,7 @@ function App() {
 
   //handleUpdate to update a dog when form is clicked
   const handleUpdate = (band) => {
-    fetch(url + "/band/" + band._id, {
+    fetch(url + "/bands/" + band._id, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -77,13 +88,19 @@ function App() {
               )}
             />
             <Route
-              exact
+              path="/artists"
+              render={(rp) => (
+                <Form {...rp} artists={artists} label="artists" />
+              )}
+            />
+
+            <Route
               path="/create"
               render={(rp) => (
                 <Form
                   {...rp}
                   label="create"
-                  band={emptyBand}
+                  bands={emptyBand}
                   handleSubmit={handleCreate}
                 />
               )}
@@ -95,7 +112,7 @@ function App() {
                 <Form
                   {...rp}
                   label="update"
-                  dog={selectedBand}
+                  bands={selectedBand}
                   handleSubmit={handleUpdate}
                 />
               )}
