@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Display from "./Display";
 
 function App() {
@@ -27,6 +27,9 @@ function App() {
           <img src="https://i.pinimg.com/originals/d4/f1/e7/d4f1e7305596c3255c56d52d13515309.gif" />
         </p>
         <p>This is my homepage</p>
+        <Link to="/create">
+          <button>Add Artist</button>
+        </Link>
       </header>
       <main>
         <BrowserRouter>
