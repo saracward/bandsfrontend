@@ -10,6 +10,15 @@ const Display = (props) => {
           <h1>{band.name}</h1>
           <h3>{band.artist}</h3>
           <h3>{band.genre}</h3>
+          <button
+            onClick={() => {
+              props.selectBand(band);
+              props.history.push("/edit");
+            }}
+          >
+            Edit
+          </button>
+          <br />
         </article>
       ))}
     </div>
